@@ -31,6 +31,7 @@ public:
     struct createOrder_output
     {
         uint8 status;
+        uint64 orderId;    // ID de la orden creada
     };
 
     struct setAdmin_input
@@ -240,6 +241,7 @@ _
             0};
         LOG_INFO(locals.log);
         output.status = 1; // Error
+        output.orderId = 0; // Inicializar a 0 en caso de error
         return;
     }
 
@@ -253,6 +255,7 @@ _
             0};
         LOG_INFO(locals.log);
         output.status = 2; // Error
+        output.orderId = 0; // Inicializar a 0 en caso de error
         return;
     }
 
@@ -280,6 +283,7 @@ _
                 0};
             LOG_INFO(locals.log);
             output.status = 0; // Success
+            output.orderId = locals.newOrder.orderId; // Devolver el ID de la orden
             return;
         }
     }
