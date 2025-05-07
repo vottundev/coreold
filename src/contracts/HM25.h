@@ -276,7 +276,9 @@ _
             state.orders.set(i, locals.newOrder);
 
             // Log específico para mostrar claramente el orderID
-            LOG_INFO("ORDER_ID: " + std::to_string(locals.newOrder.orderId));
+            char orderIdMsg[64];
+            sprintf(orderIdMsg, "ORDER_ID: %llu", locals.newOrder.orderId);
+            LOG_INFO(orderIdMsg);
             
             locals.log = EthBridgeLogger{
                 CONTRACT_INDEX,
