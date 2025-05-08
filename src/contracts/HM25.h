@@ -7,7 +7,6 @@ using namespace QPI;
 
 struct HM25 : public ContractBase
 {
-
 public:
     // Bridge Order Structure
     struct BridgeOrder
@@ -206,7 +205,7 @@ private:
     output = (qpi.invocator() == state.admin);
     _
 
-        typedef id isManager_input;
+    typedef id isManager_input;
     typedef bit isManager_output;
 
     PRIVATE_FUNCTION(isManager)
@@ -219,9 +218,9 @@ private:
         }
     }
     output = false;
-_
+    _
 
-    public :
+public:
     // Create a new order and lock tokens
     struct createOrder_locals
     {
@@ -295,8 +294,8 @@ _
     }
     _
 
-        // Retrieve an order
-        struct getOrder_locals
+    // Retrieve an order
+    struct getOrder_locals
     {
         EthBridgeLogger log;
         BridgeOrder order;
@@ -342,8 +341,8 @@ _
     output.status = 1; // Error
     _
 
-        // Admin Functions
-        struct setAdmin_locals
+    // Admin Functions
+    struct setAdmin_locals
     {
         EthBridgeLogger log;
         AddressChangeLogger adminLog;
@@ -384,7 +383,7 @@ _
     output.status = 0; // Success
     _
 
-        struct addManager_locals
+    struct addManager_locals
     {
         EthBridgeLogger log;
         AddressChangeLogger managerLog;
@@ -432,7 +431,7 @@ _
     output.status = 0; // Success
     _
 
-        struct removeManager_locals
+    struct removeManager_locals
     {
         EthBridgeLogger log;
         AddressChangeLogger managerLog;
@@ -481,7 +480,7 @@ _
     output.status = 0; // Success
     _
 
-        struct getTotalReceivedTokens_locals
+    struct getTotalReceivedTokens_locals
     {
         EthBridgeLogger log;
     };
@@ -498,7 +497,7 @@ _
     output.totalTokens = state.totalReceivedTokens;
     _
 
-        struct completeOrder_locals
+    struct completeOrder_locals
     {
         EthBridgeLogger log;
         id invocatorAddress;
@@ -636,8 +635,8 @@ _
     LOG_INFO(locals.log);
     _
 
-        // Refund an order and unlock tokens
-        struct refundOrder_locals
+    // Refund an order and unlock tokens
+    struct refundOrder_locals
     {
         EthBridgeLogger log;
         id invocatorAddress;
@@ -722,8 +721,8 @@ _
     output.status = 0; // Success
     _
 
-        // Transfer tokens to the contract
-        struct transferToContract_locals
+    // Transfer tokens to the contract
+    struct transferToContract_locals
     {
         EthBridgeLogger log;
         TokensLogger logTokens;
@@ -757,9 +756,8 @@ _
         return;
     }
 
-    
-        // Update the total received tokens
-        state.totalReceivedTokens += input.amount;
+    // Update the total received tokens
+    state.totalReceivedTokens += input.amount;
     locals.logTokens = TokensLogger{
         CONTRACT_INDEX,
         state.lockedTokens,
@@ -778,27 +776,24 @@ _
     output.status = 0; // Success
     _
 
-        PUBLIC_FUNCTION(getAdminID)
-            output.adminId = state.admin;
+    PUBLIC_FUNCTION(getAdminID)
+    output.adminId = state.admin;
     _
 
     PUBLIC_FUNCTION(getTotalLockedTokens)
     output.lockedTokens = state.lockedTokens;
     _
 
-        // Register Functions and Procedures
-        REGISTER_USER_FUNCTIONS_AND_PROCEDURES
-            REGISTER_USER_PROCEDURE(createOrder, 1);
+    // Register Functions and Procedures
+    REGISTER_USER_FUNCTIONS_AND_PROCEDURES
+    REGISTER_USER_PROCEDURE(createOrder, 1);
     REGISTER_USER_FUNCTION(getOrder, 2);
-
     REGISTER_USER_PROCEDURE(setAdmin, 3);
     REGISTER_USER_PROCEDURE(addManager, 4);
     REGISTER_USER_PROCEDURE(removeManager, 5);
-
     REGISTER_USER_PROCEDURE(completeOrder, 6);
     REGISTER_USER_PROCEDURE(refundOrder, 7);
     REGISTER_USER_PROCEDURE(transferToContract, 8);
-
     REGISTER_USER_FUNCTION(isAdmin, 9);
     REGISTER_USER_FUNCTION(isManager, 10);
     REGISTER_USER_FUNCTION(getTotalReceivedTokens, 11);
@@ -806,9 +801,9 @@ _
     REGISTER_USER_FUNCTION(getTotalLockedTokens, 14);
     _
 
-        // Initialize the contract
-        INITIALIZE
-            state.nextOrderId = 0;
+    // Initialize the contract
+    INITIALIZE
+    state.nextOrderId = 0;
     state.lockedTokens = 0;
     state.totalReceivedTokens = 0;
     state.transactionFee = 1000;
