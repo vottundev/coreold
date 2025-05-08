@@ -1,6 +1,7 @@
 #pragma once
 
 #include "qpi.h"
+#include <stdio.h>
 
 using namespace QPI;
 
